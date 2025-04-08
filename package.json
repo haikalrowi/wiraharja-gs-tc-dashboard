@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "shadcn--add": "shadcn add button"
+    "shadcn--add": "shadcn add card"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.3",
