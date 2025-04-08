@@ -1,6 +1,7 @@
 import { Card1 } from "./page--card-1";
 import { Card2 } from "./page--card-2";
 import { Card3 } from "./page--card-3";
+import { Card4 } from "./page--card-4";
 
 export default function Page() {
   return (
@@ -52,8 +53,16 @@ export default function Page() {
                 }}
               />
             </div>
+            <Card4
+              arg={{
+                title: "Upcoming Schedule",
+                description: "Today, 13 Sep 2021",
+                content: "",
+                footer: "Create a New Schedule",
+              }}
+            />
           </div>
-          <div>
+          <div className="dark flex flex-col gap-4">
             <Card2
               arg={{
                 title: "You Posted a New Job",
@@ -61,6 +70,14 @@ export default function Page() {
                   "Kindly check the requirements and terms of work and make sure everything is right.",
                 content: "Today you makes 12 Activity",
                 footer: "See All Activity",
+              }}
+            />
+            <Card4
+              arg={{
+                title: "Upcoming Schedule",
+                description: "Today, 13 Sep 2021",
+                content: "",
+                footer: "Create a New Schedule",
               }}
             />
           </div>
