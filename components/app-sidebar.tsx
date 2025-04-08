@@ -1,30 +1,34 @@
-"use client"
+"use client";
 
-import * as React from "react"
 import {
   AudioWaveform,
   BookOpen,
   Bot,
+  Building,
+  Calendar1,
   Command,
-  Frame,
   GalleryVerticalEnd,
-  Map,
-  PieChart,
+  Headphones,
+  LayoutDashboard,
+  Settings,
   Settings2,
   SquareTerminal,
-} from "lucide-react"
+  Users,
+  UserSearch,
+} from "lucide-react";
+import * as React from "react";
 
-import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
-import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { NavProjects } from "@/components/nav-projects";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
+import { NavProjects2 } from "./nav-projects-2";
 
 // This is sample data.
 const data = {
@@ -137,39 +141,66 @@ const data = {
       ],
     },
   ],
-  projects: [
+  projects2: [
     {
-      name: "Design Engineering",
+      name: "Dashboard",
       url: "#",
-      icon: Frame,
+      icon: LayoutDashboard,
     },
     {
-      name: "Sales & Marketing",
+      name: "Recruitment",
       url: "#",
-      icon: PieChart,
+      icon: UserSearch,
     },
     {
-      name: "Travel",
+      name: "Schedule",
       url: "#",
-      icon: Map,
+      icon: Calendar1,
+    },
+    {
+      name: "Employee",
+      url: "#",
+      icon: Users,
+    },
+    {
+      name: "Department",
+      url: "#",
+      icon: Building,
     },
   ],
-}
+  projects: [
+    {
+      name: "Support",
+      url: "#",
+      icon: Headphones,
+    },
+    {
+      name: "Settings",
+      url: "#",
+      icon: Settings,
+    },
+  ],
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+      <SidebarHeader className="h-16 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+        <SidebarMenu className="m-auto w-max">
+          <SidebarMenuItem>
+            <SidebarMenuButton>
+              <span className="scroll-m-20 text-2xl font-bold tracking-tight transition-[opacity] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:opacity-10">
+                WeHR
+              </span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavProjects2 projects={data.projects2} />
         <NavProjects projects={data.projects} />
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }
