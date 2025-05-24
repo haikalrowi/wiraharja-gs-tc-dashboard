@@ -36,49 +36,49 @@ import {
 } from "lucide-react";
 
 const sidebarGroups: {
-  groupLabel: string;
-  groupContentSidebarMenu: {
-    menuIcon: React.ForwardRefExoticComponent<
+  label: string;
+  contentSidebarMenu: {
+    icon: React.ForwardRefExoticComponent<
       Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
     >;
-    menuButton: string;
+    button: string;
   }[];
 }[] = [
   {
-    groupLabel: "Main",
-    groupContentSidebarMenu: [
+    label: "Main",
+    contentSidebarMenu: [
       {
-        menuIcon: LayoutDashboardIcon,
-        menuButton: "Dashboard",
+        icon: LayoutDashboardIcon,
+        button: "Dashboard",
       },
       {
-        menuIcon: UserSearchIcon,
-        menuButton: "Recruitment",
+        icon: UserSearchIcon,
+        button: "Recruitment",
       },
       {
-        menuIcon: Calendar1Icon,
-        menuButton: "Schedule",
+        icon: Calendar1Icon,
+        button: "Schedule",
       },
       {
-        menuIcon: UsersIcon,
-        menuButton: "Employee",
+        icon: UsersIcon,
+        button: "Employee",
       },
       {
-        menuIcon: BuildingIcon,
-        menuButton: "Department",
+        icon: BuildingIcon,
+        button: "Department",
       },
     ],
   },
   {
-    groupLabel: "Other",
-    groupContentSidebarMenu: [
+    label: "Other",
+    contentSidebarMenu: [
       {
-        menuIcon: HeadphonesIcon,
-        menuButton: "Support",
+        icon: HeadphonesIcon,
+        button: "Support",
       },
       {
-        menuIcon: SettingsIcon,
-        menuButton: "Settings",
+        icon: SettingsIcon,
+        button: "Settings",
       },
     ],
   },
@@ -100,19 +100,17 @@ function LayoutSidebar() {
       <SidebarContent>
         {sidebarGroups.map((sidebarGroup, index) => (
           <SidebarGroup key={index}>
-            <SidebarGroupLabel>{sidebarGroup.groupLabel}</SidebarGroupLabel>
+            <SidebarGroupLabel>{sidebarGroup.label}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {sidebarGroup.groupContentSidebarMenu.map(
-                  (sidebarMenu, index) => (
-                    <SidebarMenuItem key={index}>
-                      <SidebarMenuButton>
-                        <sidebarMenu.menuIcon />
-                        {sidebarMenu.menuButton}
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ),
-                )}
+                {sidebarGroup.contentSidebarMenu.map((sidebarMenu, index) => (
+                  <SidebarMenuItem key={index}>
+                    <SidebarMenuButton>
+                      <sidebarMenu.icon />
+                      {sidebarMenu.button}
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
