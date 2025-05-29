@@ -28,61 +28,104 @@ import {
   Calendar1Icon,
   HeadphonesIcon,
   LayoutDashboardIcon,
-  LucideProps,
   MessageSquareIcon,
   SettingsIcon,
   UserSearchIcon,
   UsersIcon,
 } from "lucide-react";
 
+type ContentMenuItems =
+  | {
+      id: string;
+      type: "default";
+      buttonIcon: React.ComponentType;
+      buttonChildren: string;
+    }
+  | {
+      id: string;
+      type: "custom";
+      button: React.ComponentType;
+    };
+
 const sidebarGroups: {
   label: string;
-  contentSidebarMenu: {
-    icon: React.ForwardRefExoticComponent<
-      Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
-    >;
-    button: string;
-  }[];
+  contentMenuItems: ContentMenuItems[];
 }[] = [
   {
     label: "Main",
-    contentSidebarMenu: [
+    contentMenuItems: [
       {
-        icon: LayoutDashboardIcon,
-        button: "Dashboard",
+        id: "dashboard",
+        type: "default",
+        buttonIcon: LayoutDashboardIcon,
+        buttonChildren: "Dashboard",
       },
       {
-        icon: UserSearchIcon,
-        button: "Recruitment",
+        id: "recruitment",
+        type: "default",
+        buttonIcon: UserSearchIcon,
+        buttonChildren: "Recruitment",
       },
       {
-        icon: Calendar1Icon,
-        button: "Schedule",
+        id: "schedule",
+        type: "default",
+        buttonIcon: Calendar1Icon,
+        buttonChildren: "Schedule",
       },
       {
-        icon: UsersIcon,
-        button: "Employee",
+        id: "employee",
+        type: "default",
+        buttonIcon: UsersIcon,
+        buttonChildren: "Employee",
       },
       {
-        icon: BuildingIcon,
-        button: "Department",
+        id: "department",
+        type: "default",
+        buttonIcon: BuildingIcon,
+        buttonChildren: "Department",
       },
     ],
   },
   {
     label: "Other",
-    contentSidebarMenu: [
+    contentMenuItems: [
       {
-        icon: HeadphonesIcon,
-        button: "Support",
+        id: "support",
+        type: "default",
+        buttonIcon: HeadphonesIcon,
+        buttonChildren: "Support",
       },
       {
-        icon: SettingsIcon,
-        button: "Settings",
+        id: "settings",
+        type: "default",
+        buttonIcon: SettingsIcon,
+        buttonChildren: "Settings",
       },
     ],
   },
 ];
+// const sidebarHeader: ContentMenuItems[] = [];
+// const sidebarFooter: ContentMenuItems[] = [];
+
+function ChatSidebarMenuItem(props: { data: ContentMenuItems }) {
+  return (
+    (props.data.type === "default" && (
+      <SidebarMenuItem>
+        <SidebarMenuButton>
+          <props.data.buttonIcon />
+          {props.data.buttonChildren}
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    )) ||
+    (props.data.type === "custom" && (
+      <SidebarMenuItem>
+        <SidebarMenuButton asChild>
+          <props.data.button />
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    ))
+  );
+}
 
 function LayoutSidebar() {
   return (
@@ -103,13 +146,8 @@ function LayoutSidebar() {
             <SidebarGroupLabel>{sidebarGroup.label}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {sidebarGroup.contentSidebarMenu.map((sidebarMenu, index) => (
-                  <SidebarMenuItem key={index}>
-                    <SidebarMenuButton>
-                      <sidebarMenu.icon />
-                      {sidebarMenu.button}
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
+                {sidebarGroup.contentMenuItems.map((items, index) => (
+                  <ChatSidebarMenuItem data={items} key={index} />
                 ))}
               </SidebarMenu>
             </SidebarGroupContent>
